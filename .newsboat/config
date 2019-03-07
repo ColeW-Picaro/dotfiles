@@ -1,0 +1,7 @@
+color listnormal default default
+color listnormal_unread default default bold
+color listfocus default red
+color listfocus_unread default red bold
+color info default red
+browser firefox
+
