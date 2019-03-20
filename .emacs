@@ -23,9 +23,6 @@
       (message "%s" file)
       (delete-file file))))
 
-;; add modes
-(add-to-list 'ac-modes 'ruby-mode)
-
 ;; global settings
 (global-linum-mode t)
 (menu-bar-mode -1)

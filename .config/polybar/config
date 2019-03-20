@@ -205,7 +205,7 @@ label-volume = VOL %percentage%%
 label-volume-foreground = ${root.foreground}
 label-volume-underline = ${colors.primary}
 
-label-muted = 🔇 muted
+label-muted = muted
 label-muted-foreground = #666
 
 bar-volume-width = 10

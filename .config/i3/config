@@ -209,6 +209,9 @@ bindsym XF86TouchpadToggle exec ~/.scripts/toggletouchpad.sh # toggle touchpad
 gaps inner 15
 gaps outer 15
 
+bindsym $mod+equal gaps inner current plus 5
+bindsym $mod+minus gaps inner current minus 5
+
 
 # startup execs
 exec --no-startup-id "~/.scripts/randomPywal"

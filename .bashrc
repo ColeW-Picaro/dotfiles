@@ -10,7 +10,7 @@ export PATH="$PATH:$HOME/.scripts"
 # Add ruby gems to path
 export PATH="$PATH:/home/colew/.gem/ruby/2.6.0/bin"
 # Change default editor to emacs (master race)
-export EDITOR="Emacs"
+export EDITOR="emacs"
 
 # set .bash file locations
 export HISTFILE="/home/$USER/.bash/.bash_history" 
