@@ -1,12 +1,13 @@
-
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
+;;; Code:
 (package-initialize)
 
 (setq backup-directory-alist '(("." . "~/.backups")))
-(setq initial-scratch-message ";; Emacs Loves You")
+(setq initial-scratch-message ";; Thank you Kanye, very cool!")
+
+(eval-when-compile
+  ;; Following line is not needed if use-package.el is in ~/.emacs.d
+  (add-to-list 'load-path "~/.emacs.d/elpa/")
+  (require 'use-package))
 
 ;; set transparency
 (set-frame-parameter (selected-frame) 'alpha '(90 90))
@@ -28,16 +29,23 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
+(auto-complete-mode)
+(ivy-mode)
+(show-paren-mode 1)
+(electric-indent-mode 1)
+(setq inhibit-startup-screen t)
+(setq inhibit-startup-buffer-menu t)
+
+(set-default-font "Iosevka-14")
 
 ;; themes directory
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(add-to-list 'load-path "~/.emacs.d/themes/")
 
 ;; load path
 (add-to-list 'load-path "~/.emacs.d/packages/")
 
-;; package requires
-
-;; global key bindings
+;; elpa load path
+(add-to-list 'load-path "~/.emacs.d/elpa/")
 
 ;; restart emacs in emacs
 (defun launch-separate-emacs-in-terminal ()
@@ -55,73 +63,24 @@
                                                          #'launch-separate-emacs-in-terminal)))))
     (save-buffers-kill-emacs)))
 
+;; Kill all other buffers
+(defun kill-other-buffers ()
+  "Kill all other buffers."
+  (interactive)
+  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
+
+;; For melpa
 (when (>= emacs-major-version 24)
   (require 'package)
   (add-to-list
    'package-archives
-   ;; '("melpa" . "http://stable.melpa.org/packages/") ; many packages won't show if using stable
    '("melpa" . "http://melpa.milkbox.net/packages/")
    t))
 
-
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#303030" "dark violet" "medium orchid" "orchid" "medium violet red" "violet red" "pale violet red" "pink"])
- '(custom-enabled-themes (quote (afternoon)))
- '(custom-safe-themes
-   (quote
-    ("fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "2b9dc43b786e36f68a9fd4b36dd050509a0e32fe3b0a803310661edb7402b8b6" "8e797edd9fa9afec181efbfeeebf96aeafbd11b69c4c85fa229bb5b9f7f7e66c" "13d20048c12826c7ea636fbe513d6f24c0d43709a761052adbca052708798ce3" "1436d643b98844555d56c59c74004eb158dc85fc55d2e7205f8d9b8c860e177f" "b583823b9ee1573074e7cbfd63623fe844030d911e9279a7c8a5d16de7df0ed0" "585942bb24cab2d4b2f74977ac3ba6ddbd888e3776b9d2f993c5704aa8bb4739" "8f97d5ec8a774485296e366fdde6ff5589cf9e319a584b845b6f7fa788c9fa9a" "a22f40b63f9bc0a69ebc8ba4fbc6b452a4e3f84b80590ba0a92b4ff599e53ad0" "e61752b5a3af12be08e99d076aedadd76052137560b7e684a8be2f8d2958edc3" "26d49386a2036df7ccbe802a06a759031e4455f07bda559dcf221f53e8850e69" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "d4fe9e2b0704052b42420cb90c2f1a2565f1a3e1f429b515e645ac97db3bac11" "450f3382907de50be905ae8a242ecede05ea9b858a8ed3cc8d1fbdf2d57090af" "e4c8810d9ab925567a69c11d5c95d198a4e7d05871453b2c92c020712559c4c1" default)))
- '(hl-todo-keyword-faces
-   (quote
-    (("TODO" . "#dc752f")
-     ("NEXT" . "#dc752f")
-     ("THEM" . "#2d9574")
-     ("PROG" . "#4f97d7")
-     ("OKAY" . "#4f97d7")
-     ("DONT" . "#f2241f")
-     ("FAIL" . "#f2241f")
-     ("DONE" . "#86dc2f")
-     ("NOTE" . "#b1951d")
-     ("KLUDGE" . "#b1951d")
-     ("HACK" . "#b1951d")
-     ("TEMP" . "#b1951d")
-     ("FIXME" . "#dc752f")
-     ("XXX" . "#dc752f")
-     ("XXXX" . "#dc752f")
-     ("???" . "#dc752f"))))
- '(inhibit-startup-buffer-menu t)
- '(inhibit-startup-screen t)
- '(initial-major-mode (quote org-mode))
- '(initial-scratch-message "# Thank you Kanye, very cool!")
- '(org-agenda-files nil)
- '(package-selected-packages
-   (quote
-    (gruvbox-theme auto-complete ## markdown-preview-eww eww-lnum markdown-mode caml zenburn-theme xresources-theme twilight-theme spacemacs-theme moe-theme)))
- '(pdf-view-midnight-colors (quote ("#b2b2b2" . "#292b2e")))
- '(term-default-fg-color "orchid"))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(term-color-blue ((t (:background "medium purple" :foreground "medium purple"))))
- '(term-color-cyan ((t (:background "blue violet" :foreground "blue violet"))))
- '(term-color-green ((t (:background "purple" :foreground "purple"))))
- '(term-color-magenta ((t (:background "dark orchid" :foreground "dark orchid"))))
- '(term-color-red ((t (:background "medium orchid" :foreground "medium orchid"))))
- '(term-color-white ((t (:background "orchid" :foreground "orchid"))))
- '(term-color-yellow ((t (:background "medium violet red" :foreground "medium violet red")))))
-
 ;; startup commands
-(ansi-term "/bin/bash")
-(split-window-right)
+;; (ansi-term "/bin/bash")
+;; (split-window-right)
 (find-file "~/")
-
 
 ;; Disabled *Completions*
 (add-hook 'minibuffer-exit-hook 
@@ -133,3 +92,81 @@
 ;; Disabled *Messages*
 (setq-default message-log-max nil)
 (kill-buffer "*Messages*")
+
+;; Hooks
+(add-hook 'prog-mode-hook #'auto-complete-mode)
+
+;; Use packages
+(use-package afternoon-theme)
+
+(use-package rainbow-delimiters
+  :ensure t
+  :diminish rainbow-delimiters-mode
+  :init (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
+(use-package web-mode
+  :ensure t
+  :mode ("\\.css\\'" "\\.phtml\\'" "\\.tpl\\.php\\'" "\\.[agj]sp\\'" "\\.as[cp]x\\'" "\\.mustache\\'" "\\.djhtml\\'" "\\.html?\\'")
+  :config
+  (setq web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-code-indent-offset 2
+        web-mode-attr-indent-offset 2
+        web-mode-style-padding 1
+        web-mode-script-padding 1
+        web-mode-block-padding 0
+        web-mode-enable-auto-pairing t
+        web-mode-enable-css-colorization t
+        web-mode-enable-block-face t
+        web-mode-enable-current-element-highlight t
+        web-mode-enable-current-column-highlight t)
+  (use-package web-beautify
+    :ensure t))
+
+(use-package rainbow-mode
+  :ensure t
+  :after web-mode
+  :diminish rainbow-mode
+  :init (add-hook 'web-mode-hook 'rainbow-mode))
+
+(use-package company
+  :ensure t
+  :defer 2
+  :diminish company-mode "complete"
+  :config (global-company-mode)
+  :bind ("C-\\" . company-complete-common))
+
+;;(use-package ewal)
+
+;; Key Bindings
+(require 'bind-key)
+(bind-key* "C-x C-f" 'counsel-find-file)
+(bind-key* "C-s" 'swiper)
+(bind-key* "C-x C-b" 'ibuffer)
+
+;; Custom faces
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(rainbow-delimiters-depth-1-face ((t (:foreground "dark orange"))))
+ '(rainbow-delimiters-depth-2-face ((t (:foreground "deep pink"))))
+ '(rainbow-delimiters-depth-3-face ((t (:foreground "chartreuse"))))
+ '(rainbow-delimiters-depth-4-face ((t (:foreground "deep sky blue"))))
+ '(rainbow-delimiters-depth-5-face ((t (:foreground "yellow"))))
+ '(rainbow-delimiters-depth-6-face ((t (:foreground "orchid"))))
+ '(rainbow-delimiters-depth-7-face ((t (:foreground "spring green"))))
+ '(rainbow-delimiters-depth-8-face ((t (:foreground "sienna1")))))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
+ '(package-selected-packages
+   (quote
+    (magit counsel swiper ivy web-beautify web-mode zenburn-theme xresources-theme w3m use-package twilight-theme spacemacs-theme rainbow-mode rainbow-delimiters monokai-theme moe-theme markdown-preview-eww markdown-mode gruvbox-theme glsl-mode eww-lnum elcord ewal dired-hacks-utils caml auto-complete))))

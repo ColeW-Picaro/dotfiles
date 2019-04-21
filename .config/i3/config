@@ -33,7 +33,7 @@ new_window pixel 0
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec --no-startup-id urxvt
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -128,7 +128,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -163,32 +163,38 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #d
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen brightness
 
 # Touchpad controls
-bindsym XF86TouchpadToggle exec ~/.scripts/toggletouchpad.sh # toggle touchpad
+bindsym XF86TouchpadToggle exec --no-startup-id ~/.scripts/toggletouchpad.sh # toggle touchpad
 
 ### ALL $MOD+X KEYBINDINGS ###
 
   ### Execs ###
 
   # mpc
-  bindsym $mod+n exec mpc play
-  bindsym $mod+m exec mpc pause
-  bindsym $mod+comma exec mpc prev
-  bindsym $mod+period exec mpc next
+  #bindsym $mod+n exec mpc play
+  #bindsym $mod+m exec mpc pause
+  #bindsym $mod+comma exec mpc prev
+  #bindsym $mod+period exec mpc next
+
+  # playerctl (spotify)
+  bindsym $mod+comma exec --no-startup-id playerctl previous
+  bindsym $mod+period exec --no-startup-id playerctl next
+  bindsym $mod+m exec --no-startup-id playerctl play-pause
+
   # Scrot
-  bindsym $mod+t exec scrot ~/Pictures/Screenshots/%b%d::%H%M%S.png
+  bindsym $mod+t exec --no-startup-id scrot ~/Pictures/Screenshots/%b%d::%H%M%S.png
 
   # Refresh Wallpaper
-  bindsym $mod+p exec ~/.scripts/randomPywal.sh
+  bindsym $mod+p exec --no-startup-id ~/.scripts/randomPywal.sh
 
   # Emacs
-  bindsym $mod+e exec emacs
+  bindsym $mod+e exec --no-startup-id emacs
 
   # Firefox
-  bindsym $mod+x exec firefox
+  bindsym $mod+x exec --no-startup-id firefox
 
   ### i3 specific ###
 
@@ -203,14 +209,17 @@ bindsym XF86TouchpadToggle exec ~/.scripts/toggletouchpad.sh # toggle touchpad
 
   # enter fullscreen mode for the focused container
   bindsym $mod+f fullscreen toggle
-  
+
+  # lock
+  bindsym $mod+shift+x exec --no-startup-id "~/.scripts/lock.sh"
 
 # needed for i3-gaps
 gaps inner 15
 gaps outer 15
 
-bindsym $mod+equal gaps inner current plus 5
-bindsym $mod+minus gaps inner current minus 5
+#resize gaps
+bindsym $mod+equal gaps outer current plus 1
+bindsym $mod+minus gaps outer current minus 1
 
 
 # startup execs

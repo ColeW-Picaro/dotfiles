@@ -7,8 +7,15 @@
 
 # Add scripts folder to path
 export PATH="$PATH:$HOME/.scripts"
+# Add corruptor to path
+export PATH="$PATH:$HOME/Repos/corruptor"
+# Add local bin to path
+export PATH="$PATH:$HOME/.local/bin"
 # Add ruby gems to path
 export PATH="$PATH:/home/colew/.gem/ruby/2.6.0/bin"
+
+export QUTEWAL_DYNAMIC_LOADING=True
+
 # Change default editor to emacs (master race)
 export EDITOR="emacs"
 
