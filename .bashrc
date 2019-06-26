@@ -35,3 +35,8 @@ alias ls='ls --color=auto'
 # PS1="\[\e[34m\]\u you're in \w:\[\e[m\]"
 
 export PS1="\[$(tput bold)\]\[$(tput setaf 1)\]\u\[$(tput setaf 2)\] in \[$(tput setaf 3)\]\w: \[$(tput sgr0)\]"
+export EMACS=true
+
+export EMACS=false
+export EMACS=false
+export EMACS=true

@@ -24,17 +24,7 @@
       (message "%s" file)
       (delete-file file))))
 
-;; global settings
-(global-linum-mode t)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(auto-complete-mode)
-(ivy-mode)
-(show-paren-mode 1)
-(electric-indent-mode 1)
-(setq inhibit-startup-screen t)
-(setq inhibit-startup-buffer-menu t)
+
 
 (set-default-font "Iosevka-14")
 
@@ -69,6 +59,15 @@
   (interactive)
   (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 
+;; Generate hpp and cpp files
+(defun gen-cpp-file (name)
+  "Generate a .cpp and .hpp file from filename"
+  (interactive "sfile name?: ")
+  (counsel-find-file (concat name ".cpp"))
+  (counsel-find-file (concat name ".hpp")))
+  
+
+
 ;; For melpa
 (when (>= emacs-major-version 24)
   (require 'package)
@@ -80,7 +79,7 @@
 ;; startup commands
 ;; (ansi-term "/bin/bash")
 ;; (split-window-right)
-(find-file "~/")
+;; (find-file "~/")
 
 ;; Disabled *Completions*
 (add-hook 'minibuffer-exit-hook 
@@ -138,11 +137,35 @@
 
 ;;(use-package ewal)
 
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-startup-banner 'logo)
+  (setq dashboard-items '((recents  . 5)
+                          (bookmarks . 5))))
+
+
+
 ;; Key Bindings
 (require 'bind-key)
 (bind-key* "C-x C-f" 'counsel-find-file)
 (bind-key* "C-s" 'swiper)
 (bind-key* "C-x C-b" 'ibuffer)
+(bind-key* "C-x p" 'previous-multiframe-window)
+
+;; global settings
+(global-linum-mode t)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(auto-complete-mode)
+(ivy-mode)
+(show-paren-mode 1)
+(electric-indent-mode 1)
+(setq inhibit-startup-screen t)
+(setq inhibit-startup-buffer-menu t)
+(setq scroll-step 1)
 
 ;; Custom faces
 (custom-set-faces
@@ -169,4 +192,4 @@
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(package-selected-packages
    (quote
-    (magit counsel swiper ivy web-beautify web-mode zenburn-theme xresources-theme w3m use-package twilight-theme spacemacs-theme rainbow-mode rainbow-delimiters monokai-theme moe-theme markdown-preview-eww markdown-mode gruvbox-theme glsl-mode eww-lnum elcord ewal dired-hacks-utils caml auto-complete))))
+    (dashboard-hackernews magit counsel swiper ivy web-beautify web-mode zenburn-theme xresources-theme w3m use-package twilight-theme spacemacs-theme rainbow-mode rainbow-delimiters monokai-theme moe-theme markdown-preview-eww markdown-mode gruvbox-theme glsl-mode eww-lnum elcord ewal dired-hacks-utils caml auto-complete))))
