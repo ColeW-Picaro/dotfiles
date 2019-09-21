@@ -223,7 +223,7 @@ bindsym $mod+minus gaps outer current minus 1
 
 
 # startup execs
-exec --no-startup-id "~/.scripts/randomPywal"
+exec --no-startup-id "~/.scripts/randomPywal.sh"
 exec --no-startup-id "compton"
 exec --no-startup-id "urxvt"
 exec --no-startup-id "mpd"

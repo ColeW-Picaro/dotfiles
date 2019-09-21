@@ -7,6 +7,8 @@ URxvt.font: xft:Iosevka:size=14,
 URxvt.depth: 32
 URxvt.internalBorder: 0
 
+
+
 !-- Emacs Settings --!
 
 ! hard contrast: *background: #1d2021

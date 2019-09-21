@@ -5,4 +5,4 @@
 
 files=($HOME/Pictures/Wallpapers/*)
 printf "%s\n" "${files[RANDOM % ${#files[@]}]}"
-wal -a 85 -i ~/Pictures/Wallpapers/"$file"
+wal -a 85 -i ~/Pictures/Wallpapers/"$file" --backend colorthief
