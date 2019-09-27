@@ -96,7 +96,8 @@
 (add-hook 'prog-mode-hook #'auto-complete-mode)
 
 ;; Use packages
-(use-package afternoon-theme)
+;; (use-package afternoon-theme)
+(use-package gruvbox-theme)
 
 (use-package rainbow-delimiters
   :ensure t
@@ -145,8 +146,6 @@
   (setq dashboard-items '((recents  . 5)
                           (bookmarks . 5))))
 
-
-
 ;; Key Bindings
 (require 'bind-key)
 (bind-key* "C-x C-f" 'counsel-find-file)
@@ -173,6 +172,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(line-number ((t (:background "#3c3836" :foreground "pale goldenrod"))))
+ '(linum ((t (:background "#1d2021" :foreground "pale goldenrod"))))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "dark orange"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "deep pink"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "chartreuse"))))
@@ -182,6 +183,20 @@
  '(rainbow-delimiters-depth-7-face ((t (:foreground "spring green"))))
  '(rainbow-delimiters-depth-8-face ((t (:foreground "sienna1")))))
 
+(use-package caml)
+
+(use-package magit)
+
+(use-package counsel)
+
+(use-package swiper)
+
+(use-package ivy)
+
+(use-package auto-complete)
+
+(use-package dashboard-hackernews)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -189,10 +204,4 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["#303030" "#ff4b4b" "#d7ff5f" "#fce94f" "#5fafd7" "#d18aff" "#afd7ff" "#c6c6c6"])
- '(custom-safe-themes
-   (quote
-    ("2540689fd0bc5d74c4682764ff6c94057ba8061a98be5dd21116bf7bf301acfb" "26d49386a2036df7ccbe802a06a759031e4455f07bda559dcf221f53e8850e69" "8f97d5ec8a774485296e366fdde6ff5589cf9e319a584b845b6f7fa788c9fa9a" "585942bb24cab2d4b2f74977ac3ba6ddbd888e3776b9d2f993c5704aa8bb4739" "a22f40b63f9bc0a69ebc8ba4fbc6b452a4e3f84b80590ba0a92b4ff599e53ad0" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
- '(package-selected-packages
-   (quote
-    (afternoon-theme dashboard-hackernews magit counsel swiper ivy web-beautify web-mode zenburn-theme xresources-theme w3m use-package twilight-theme spacemacs-theme rainbow-mode rainbow-delimiters monokai-theme moe-theme markdown-preview-eww markdown-mode gruvbox-theme glsl-mode eww-lnum elcord ewal dired-hacks-utils caml auto-complete)))
- '(pdf-view-midnight-colors (quote ("#fdf4c1" . "#282828"))))
+)

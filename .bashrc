@@ -13,6 +13,8 @@ export PATH="$PATH:$HOME/Repos/corruptor"
 export PATH="$PATH:$HOME/.local/bin"
 # Add ruby gems to path
 export PATH="$PATH:/home/colew/.gem/ruby/2.6.0/bin"
+# Add nullpomino to path
+export PATH="$PATH:/home/colew/Nullpomino/NullpoMino/"
 
 export QUTEWAL_DYNAMIC_LOADING=True
 
