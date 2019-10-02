@@ -211,8 +211,8 @@ bindsym XF86TouchpadToggle exec --no-startup-id ~/.scripts/toggletouchpad.sh # t
   bindsym $mod+f fullscreen toggle
 
   # lock
-  bindsym $mod+shift+x exec --no-startup-id "~/.scripts/lock.sh"
-
+  # bindsym $mod+shift+x exec --no-startup-id "~/.scripts/lock.sh"
+  bindsym $mod+shift+x exec --no-startup-id "i3lock-fancy -p"
 # needed for i3-gaps
 gaps inner 15
 gaps outer 15
