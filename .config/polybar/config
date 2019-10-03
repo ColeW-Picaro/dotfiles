@@ -1,25 +1,8 @@
-;==========================================================
-;
-;
-;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
-;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
-;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
-;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
-;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
-;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
-;
-;
-;   To learn more about how to configure Polybar
-;   go to https://github.com/jaagr/polybar
-;
-;   The README contains alot of information
-;
-;==========================================================
-
 [colors]
-background = ${xrdb:color0:#222}
+;background = ${xrdb:color0:#222}
+background = #00000000
 ;background = #222
-background-alt = #444
+background-alt = #00000000
 foreground = ${xrdb:color7:#222}
 ;foreground = #dfdfdf
 foreground-alt = #555
@@ -28,321 +11,244 @@ secondary = ${xrdb:color5:#222}
 alert = #bd2c40
 
 [bar/top]
-;monitor = ${env:MONITOR:HDMI-1}
+;monitor = ${env:MONITOR:}
 width = 100%
-height = 27
-;offset-x = 1%
-;offset-y = 1%
-radius = 6.0
-fixed-center = true
+height = 30
+border-size = 0
+border-top-size = 0
+border-left-size = 2
+border-right-size = 0
+border-bottom-size = 0
+radius-top = 00
+radius-bottom = 0
+line-size = 2
+spacing = 1
+offset-x = 0
+offset-y = 0
+padding-left = 0
+adding-right = 0
+
+
+font-0 = "Iosevka:size=12;1"
+font-1 = "Kochi Gothic:size=12;1"
+font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=12;3"
+font-3 = "Font Awesome 5 Free:style=Regular:pixelsize=12;3"
+font-4 = "Font Awesome 5 Brands:pixelsize=12;3"
+
+dpi-x = 0
+dpi-y = 0
 
 background = ${colors.background}
 foreground = ${colors.foreground}
-
-line-size = 3
-line-color = #f00
-
-border-size = 0
-border-color = #000000
-
-padding-left = 0
-padding-right = 2
-
-module-margin-left = 1
+module-margin-left = 2
 module-margin-right = 2
+modules-left = i3 spotify
+modules-center = date
+modules-right = weather eth alsa powermenu
 
-font-0 = Iosevka:size=12;1
-;font-0 = Back Issues BB Regular:size=12;1
-font-1 = Kochi Gothic:antialias=false;1
-font-2 = Font Awesome 5 Free Regular:size=12;1
+[settings]
+compositing-background = over
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
+screenchange-reload = true
+pseudo-transparency = true
 
-modules-left = i3
-modules-center = spotify
-modules-right = pulseaudio battery date
 
-tray-position = right
-tray-padding = 2
-;tray-transparent = true
-;tray-background = #0063ff
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+fixed-center = true
 
-;wm-restack = bspwm
-;wm-restack = i3
+[module/spotify]
+type = custom/script
+interval = 1
+format-prefix = "  "
 
-;override-redirect = true
+format = <label>
 
-;scroll-up = bspwm-desknext
-;scroll-down = bspwm-deskprev
-
-scroll-up = i3wm-wsnext
-scroll-down = i3wm-wsprev
-
-cursor-click = pointer
-cursor-scroll = ns-resize
-
-[module/xwindow]
-type = internal/xwindow
-label = %title:0:30:...%
-
-[module/bspwm]
-type = internal/bspwm
-
-label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 2
-
-label-occupied = %index%
-label-occupied-padding = 2
-
-label-urgent = %index%!
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
-
-label-empty = %index%
-label-empty-foreground = ${colors.foreground-alt}
-label-empty-padding = 2
-
-; Separator in between workspaces
-; label-separator = |
+exec = python /home/colew/.config/polybar/spotify.py -f '{artist}: {song}' -t 50
+format-underline = ${colors.secondary}
 
 [module/i3]
 type = internal/i3
+
 format = <label-state> <label-mode>
-index-sort = true
-wrapping-scroll = false
+pin-workspaces = true
 
-; Only show workspaces on the same output as the bar
-;pin-workspaces = true
+label-focused = %icon%
+label-focused-background = ${colors.foreground-alt}
+label-focused-foreground = ${colors.foreground}
+label-focused-padding = 1
+label-focused-underline = ${colors.foreground-alt}
 
-label-mode-padding = 2
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
+label-unfocused = %icon%
+label-unfocused-background = ${colors.background}
+label-unfocused-foreground = ${colors.foreground}
+label-unfocused-padding = 1
+label-unfocused-underline = ${colors.background}
 
-3; focused = Active workspace on focused monitor
-label-focused = %index%
-label-focused-background = ${module/bspwm.label-focused-background}
-label-focused-underline = ${module/bspwm.label-focused-underline}
-label-focused-padding = ${module/bspwm.label-focused-padding}
+label-urgent = %icon%
+label-urgent-background = ${colors.background}
+label-urgent-foreground = ${colors.foreground-alt}
+label-urgent-padding = 1
+label-urgent-underline = ${colors.background}
 
-; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%
-label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+label-visible = %icon%
+label-visible-background = ${colors.background}
+label-visible-foreground = ${colors.foreground}
+label-visible-padding = 1
+label-visible-underline = ${colors.background}
 
-; visible = Active workspace on unfocused monitor
-label-visible = %index%
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
 
-; urgent = Workspace with urgency hint set
-label-urgent = %index%
-label-urgent-background = ${module/bspwm.label-urgent-background}
-label-urgent-padding = ${module/bspwm.label-urgent-padding}
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 10;
+ws-icon-4 = 9;
+ws-icon-default = 
 
-; Separator in between workspaces
-; label-separator = |
+[module/mpd]
+type = internal/mpd
+host = 127.0.0.1
+port = 6600
+interval = 1
 
+format-online = <label-song>
+
+label-song = "  %artist% - %title%"
+label-offline = mopidy is offline
+
+toggle-on-foreground = ${colors.foreground}
+toggle-off-foreground = ${colors.foreground-alt}
+
+bar-progress-width = 30
+bar-progress-format = %{A4:mpdseek+2: A5:mpdseek-2:}%fill%%indicator%%empty%%{A A}
+bar-progress-indicator = >
+bar-progress-indicator-foreground = ${colors.foreground}
+bar-progress-fill = -
+bar-progress-fill-foreground = ${colors.foreground}
+bar-progress-empty = -
+bar-progress-empty-foreground = ${colors.foreground}
 
 [module/wlan]
 type = internal/network
-interface = wlp2s0
+interface = wlp3s0
 interval = 3.0
 
-format-connected = <ramp-signal> <label-connected>
-format-connected-underline = ${colors.primary}
-label-connected = %essid%
-exec = nm-applet &
+format-connected = <label-connected>
 
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
+label-connected = "  %essid%   %signal%% "
+label-disconnected = " %ifname% off "
 
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = ${colors.foreground-alt}
+ramp-signal-0 =" "
+ramp-signal-1 =" "
+ramp-signal-2 =" "
+ramp-signal-3 =" "
+ramp-signal-4 =" "
 
 [module/eth]
 type = internal/network
-interface = enp1s0f1
+interface = enp4s0
 interval = 3.0
 
-format-connected-underline = ${colors.primary}
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
+format-connected-prefix = " "
+format-connected-foreground-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
 
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
+label-disconnected = %ifname% disconnected
+label-disconnected-foreground = ${colors.foreground-alt}
 
 [module/date]
 type = internal/date
 interval = 5
 
-date =
-date-alt = " %Y-%m-%d"
-
-time = %H:%M
-time-alt = %H:%M:%S
-
-format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.primary}
+date = "%a %d %b,"
+date-alt = "%d/%m/%y"
+time = "%H:%M"
+time-alt = %H:%M
 
 label = %date% %time%
 
-[module/pulseaudio]
-type = internal/pulseaudio
+[module/alsa]
+type = internal/alsa
 
-format-volume = <label-volume> <bar-volume>
-label-volume = VOL %percentage%%
-label-volume-foreground = ${root.foreground}
-label-volume-underline = ${colors.primary}
+format-volume = <ramp-volume><label-volume>
+label-volume = "%percentage%"
+ramp-volume-0 =" "
+ramp-volume-1 =" "
+ramp-volume-2 =" "
+ramp-volume-3 =" "
+label-volume-foreground = ${colors.foreground}
 
+format-muted-prefix = " "
+format-muted-foreground = ${colors.foreground}
 label-muted = muted
-label-muted-foreground = #666
-
-bar-volume-width = 10
-bar-volume-foreground-0 = ${colors.primary}
-bar-volume-foreground-1 = ${colors.primary}
-bar-volume-foreground-2 = ${colors.primary}
-bar-volume-foreground-3 = ${colors.primary}
-bar-volume-foreground-4 = ${colors.primary}
-bar-volume-foreground-5 = ${colors.primary}
-bar-volume-foreground-6 = ${colors.primary}
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.secondary}
+label-muted-foreground = ${colors.foreground}
 
 [module/battery]
 type = internal/battery
 battery = BAT0
-adapter = AC
+adapter = AT0
 full-at = 98
 
-format-charging = <label-charging>
-format-charging-underline = ${colors.secondary}
+poll-interval = 5
 
-format-discharging = <label-discharging>
-format-discharging-underline = ${colors.primary}
+format-charging = <animation-charging><label-charging>
+format-discharging = <ramp-capacity><label-discharging>
+format-full = <ramp-capacity><label-full>
+label-charging = %percentage%%
+label-discharging = %percentage%%
+label-full = %percentage%%
 
-[settings]
-screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
 
-[module/spotify]
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 650
+
+[module/powermenu]
+type = custom/menu
+
+format-spacing = 1
+
+label-open = 
+label-close = cancel
+label-close-foreground = ${colors.foreground-alt}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = 
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = systemctl reboot
+
+menu-2-0 = 
+menu-2-0-exec = systemctl poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+[module/weather]
 type = custom/script
-interval = 1
-format-prefix = ""
+interval = 1800
 format = <label>
-exec = python /home/colew/.config/polybar/spotify.py -f '{artist}: {song}' -t 50
-format-underline = ${colors.secondary}
-
-
-
-[module/mpd]
-type = internal/mpd
-
-; Host where mpd is running (either ip or domain name)
-; Can also be the full path to a unix socket where mpd is running.
-host = 127.0.0.1
-port = 6600
-password = 
-
-; Seconds to sleep between progressbar/song timer sync
-; Default: 1
-interval = 2
-
-
-; Available tags:
-;   <label-song> (default)
-;   <label-time>
-;   <bar-progress>
-;   <toggle> - gets replaced with <icon-(pause|play)>
-;   <toggle-stop> - gets replaced with <icon-(stop|play)>
-;   <icon-random>
-;   <icon-repeat>
-;   <icon-repeatone> (deprecated)
-;   <icon-single> - Toggle playing only a single song. Replaces <icon-repeatone>
-;   <icon-consume>
-;   <icon-prev>
-;   <icon-stop>
-;   <icon-play>
-;   <icon-pause>
-;   <icon-next>
-;   <icon-seekb>
-;   <icon-seekf>
-format-online = <label-time> <label-song>
-;format-playing = ${self.format-online}
-;format-paused = ${self.format-online}
-;format-stopped = ${self.format-online}
-
-; Available tags:
-;   <label-offline>
-;format-offline = <label-offline>
-
-; Available tokens:
-;   %artist%
-;   %album-artist%
-;   %album%
-;   %date%
-;   %title%
-; Default: %artist% - %title%
-label-song = 𝄞 %artist% - %title%
-label-song-foreground = ${colors.foreground}
-
-; Available tokens:
-;   %elapsed%
-;   %total%
-; Default: %elapsed% / %total%
-;label-time = %elapsed% / %total%
-
-; Available tokens:
-;   None
-label-offline = mpd is offline
-
-; Only applies if <icon-X> is used
-;icon-play = ⏵
-;icon-pause = ⏸
-;icon-stop = ⏹
-;icon-prev = ⏮
-;icon-next = ⏭
-;icon-seekb = ⏪
-;icon-seekf = ⏩
-;icon-random = 
-;icon-repeat = 
-;icon-repeatone = 1
-;icon-single = 
-;icon-consume = ✀
-
-; Used to display the state of random/repeat/repeatone/single
-; Only applies if <icon-[random|repeat|repeatone|single]> is used
-;toggle-on-foreground = #ff
-;toggle-off-foreground = #55
-
-; Only applies if <bar-progress> is used
-bar-progress-width = 45
-bar-progress-indicator = |
-bar-progress-fill = ─
-bar-progress-empty = ─
-
-[global/wm]
-margin-top = 0
-margin-bottom = 0
+format-padding = 1
+; format-suffix = "°C"
+format-prefix-foreground = ${colors.foreground-alt}
+format-background = ${colors.background}
+exec = ~/.scripts/weather.sh -i
 
 ; vim:ft=dosini
