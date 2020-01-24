@@ -1,11 +1,10 @@
 [colors]
-;background = ${xrdb:color0:#222}
-background = #00000000
+background = ${xrdb:color0:40:#222}
+;background = #00000000
 ;background = #222
-background-alt = #00000000
-foreground = ${xrdb:color7:#222}
-;foreground = #dfdfdf
-foreground-alt = #555
+background-alt = ${xrdb:background:40:#000}
+foreground = ${xrdb:color5:#222}
+foreground-alt = ${xrdb:color3:#444}
 primary = ${xrdb:color3:#222}
 secondary = ${xrdb:color5:#222}
 alert = #bd2c40
@@ -27,10 +26,10 @@ offset-x = 0
 offset-y = 0
 padding-left = 0
 adding-right = 0
-
+interval = 1
 
 font-0 = "Iosevka:size=12;1"
-font-1 = "Kochi Gothic:size=12;1"
+font-1 = "Kochi Gothic:style=Regular:size=12;2"
 font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=12;3"
 font-3 = "Font Awesome 5 Free:style=Regular:pixelsize=12;3"
 font-4 = "Font Awesome 5 Brands:pixelsize=12;3"
@@ -42,9 +41,11 @@ background = ${colors.background}
 foreground = ${colors.foreground}
 module-margin-left = 2
 module-margin-right = 2
-modules-left = i3 spotify
+modules-left = i3 player-mpris-simple
 modules-center = date
-modules-right = weather eth alsa powermenu
+modules-right = weather battery eth wlan alsa powermenu
+
+tray-position = right
 
 [settings]
 compositing-background = over
@@ -64,12 +65,23 @@ fixed-center = true
 [module/spotify]
 type = custom/script
 interval = 1
-format-prefix = "  "
+format-prefix = "  "
 
 format = <label>
 
 exec = python /home/colew/.config/polybar/spotify.py -f '{artist}: {song}' -t 50
 format-underline = ${colors.secondary}
+
+click-left = playerctl play-pause
+click-right = playerctl next
+
+[module/player-mpris-simple]
+type = custom/script
+exec = ~/.config/polybar/player-mpris.sh
+interval = 1
+click-left = playerctl previous
+click-right = playerctl next
+click-middle = playerctl play-pause
 
 [module/i3]
 type = internal/i3
@@ -79,7 +91,7 @@ pin-workspaces = true
 
 label-focused = %icon%
 label-focused-background = ${colors.foreground-alt}
-label-focused-foreground = ${colors.foreground}
+label-focused-foreground = ${colors.background-alt}
 label-focused-padding = 1
 label-focused-underline = ${colors.foreground-alt}
 
@@ -101,40 +113,24 @@ label-visible-foreground = ${colors.foreground}
 label-visible-padding = 1
 label-visible-underline = ${colors.background}
 
+fuzzy-match = true
 
 ws-icon-0 = 1;
 ws-icon-1 = 2;
 ws-icon-2 = 3;
-ws-icon-3 = 10;
+ws-icon-3 = 0;
 ws-icon-4 = 9;
-ws-icon-default = 
+ws-icon-5 = 4;四
+ws-icon-6 = 5;五
+ws-icon-7 = 6;六
+ws-icon-8 = 7;七
+ws-icon-9 = 8;八
 
-[module/mpd]
-type = internal/mpd
-host = 127.0.0.1
-port = 6600
-interval = 1
-
-format-online = <label-song>
-
-label-song = "  %artist% - %title%"
-label-offline = mopidy is offline
-
-toggle-on-foreground = ${colors.foreground}
-toggle-off-foreground = ${colors.foreground-alt}
-
-bar-progress-width = 30
-bar-progress-format = %{A4:mpdseek+2: A5:mpdseek-2:}%fill%%indicator%%empty%%{A A}
-bar-progress-indicator = >
-bar-progress-indicator-foreground = ${colors.foreground}
-bar-progress-fill = -
-bar-progress-fill-foreground = ${colors.foreground}
-bar-progress-empty = -
-bar-progress-empty-foreground = ${colors.foreground}
+ws-icon-default = ¯\_(ツ)_/¯
 
 [module/wlan]
 type = internal/network
-interface = wlp3s0
+interface = wlp2s0
 interval = 3.0
 
 format-connected = <label-connected>
@@ -147,6 +143,8 @@ ramp-signal-1 =" "
 ramp-signal-2 =" "
 ramp-signal-3 =" "
 ramp-signal-4 =" "
+
+click-left = nm-connection-editor
 
 [module/eth]
 type = internal/network
