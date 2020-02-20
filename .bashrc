@@ -30,7 +30,13 @@ shopt -s autocd
 # Infinite history.
 HISTSIZE= HISTFILESIZE= 
 
+# Aliases
 alias ls='ls --color=auto'
+
+# Class directory Aliases
+alias parallel='cd ~/Documents/CS476/'
+alias os='cd ~/Documents/CS380/'
+alias software='cd ~/Documents/CS420/'
 
 # PS1='Sir?: '
 

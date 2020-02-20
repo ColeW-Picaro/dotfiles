@@ -18,6 +18,8 @@ font iosevka:medium 12
 # No title bars
 new_window pixel 0
 
+hide_edge_borders both
+
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
@@ -132,27 +134,27 @@ bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed 
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+# These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+# Pressing left will shrink the window’s width.
+# Pressing right will grow the window’s width.
+# Pressing up will shrink the window’s height.
+# Pressing down will grow the window’s height.
+bindsym j resize shrink width 10 px or 10 ppt
+bindsym k resize grow height 10 px or 10 ppt
+bindsym l resize shrink height 10 px or 10 ppt
+bindsym semicolon resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+# same bindings, but for the arrow keys
+bindsym Left resize shrink width 10 px or 10 ppt
+bindsym Down resize grow height 10 px or 10 ppt
+bindsym Up resize shrink height 10 px or 10 ppt
+bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
+# back to normal: Enter or Escape or $mod+r
+bindsym Return mode "default"
+bindsym Escape mode "default"
+bindsym $mod+r mode "default"
 }
 
 
@@ -162,56 +164,56 @@ bindsym XF86AudioMute        exec --no-startup-id "amixer -q set Master toggle"
 bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -q set Master 5%+ unmute"
 bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -q set Master 5%- unmute"
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 2
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 2
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec --no-startup-id ~/.scripts/toggletouchpad.sh # toggle touchpad
 
 ### ALL $MOD+X KEYBINDINGS ###
 
-  ### Execs ###
+### Execs ###
 
-  # mpc
-  #bindsym $mod+n exec mpc play
-  #bindsym $mod+m exec mpc pause
-  #bindsym $mod+comma exec mpc prev
-  #bindsym $mod+period exec mpc next
+# mpc
+#bindsym $mod+n exec mpc play
+#bindsym $mod+m exec mpc pause
+#bindsym $mod+comma exec mpc prev
+#bindsym $mod+period exec mpc next
 
-  # playerctl (spotify)
-  bindsym $mod+comma exec --no-startup-id playerctl previous
-  bindsym $mod+period exec --no-startup-id playerctl next
-  bindsym $mod+m exec --no-startup-id playerctl play-pause
+# playerctl (spotify)
+bindsym $mod+comma exec --no-startup-id playerctl previous
+bindsym $mod+period exec --no-startup-id playerctl next
+bindsym $mod+m exec --no-startup-id playerctl play-pause
 
-  # Scrot
-  bindsym $mod+t exec --no-startup-id scrot ~/Pictures/Screenshots/%b%d::%H%M%S.png
+# Scrot
+bindsym $mod+t exec --no-startup-id scrot ~/Pictures/Screenshots/%b%d::%H%M%S.png
 
-  # Refresh Wallpaper
-  bindsym $mod+p exec --no-startup-id ~/.scripts/randomPywal.sh
+# Refresh Wallpaper
+bindsym $mod+p exec --no-startup-id ~/.scripts/randomPywal.sh
 
-  # Emacs
-  bindsym $mod+e exec --no-startup-id emacs
+# Emacs
+bindsym $mod+e exec --no-startup-id i3-msg 'exec urxvt -name Emacs -e emacs -nw'
 
-  # Firefox
-  bindsym $mod+x exec --no-startup-id firefox
+# Firefox
+bindsym $mod+x exec --no-startup-id firefox
 
-  ### i3 specific ###
+### i3 specific ###
 
-  # Resise Mode
-  bindsym $mod+r mode "resize"
+# Resise Mode
+bindsym $mod+r mode "resize"
 
-  # split in horizontal orientation
-  bindsym $mod+h split h
+# split in horizontal orientation
+bindsym $mod+h split h
 
-  # split in vertical orientation
-  bindsym $mod+v split v
+# split in vertical orientation
+bindsym $mod+v split v
 
-  # enter fullscreen mode for the focused container
-  bindsym $mod+f fullscreen toggle
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
 
-  # lock
-  # bindsym $mod+shift+x exec --no-startup-id "~/.scripts/lock.sh"
-  bindsym $mod+shift+x exec --no-startup-id "i3lock-fancy -p"
+# lock
+# bindsym $mod+shift+x exec --no-startup-id "~/.scripts/lock.sh"
+bindsym $mod+shift+x exec --no-startup-id "i3lock-fancy -p"
 # needed for i3-gaps
 gaps inner 15
 gaps outer 15
@@ -229,7 +231,6 @@ exec --no-startup-id "mpd"
 exec --no-startup-id "nm-applet"
 exec_always --no-startup-id "killall polybar ; $HOME/.config/polybar/launch.sh"
 
-assign [class="URxvt"] 2
 assign [class="Firefox"] 1
-assign [class="Emacs"] 3
-assign [class="Spotify"] 10
+assign [class="^URxvt$" instance="^Emacs$"] 3
+assign [class="URxvt"] 2

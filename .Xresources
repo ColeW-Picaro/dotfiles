@@ -1,9 +1,8 @@
 !-- URxvt Settings --!
 URxvt.scrollBar: false
-Urxvt.borderless: true
+URxvt.borderless: true
 URxvt.font: xft:Iosevka:size=14,
 	    xft:Kochi Gothic:antialias=false
-URxvt.depth: 32
 URxvt.internalBorder: 0
 
 !-- Emacs Settings --!

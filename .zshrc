@@ -19,6 +19,12 @@ export QUTEWAL_DYNAMIC_LOADING=True
 
 alias "emacs"="emacs -nw"
 
+# Class directory Aliases
+alias parallel='cd ~/Documents/CS476/'
+alias os='cd ~/Documents/CS380/'
+alias software='cd ~/Documents/CS420/'
+
+
 EDITOR="emacs -nw"
 
 
